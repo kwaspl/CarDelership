@@ -1,12 +1,12 @@
 package com.example.dealership.query.repo;
 
 import com.example.dealership.query.datamodel.CarForSaleDTO;
-import com.hazelcast.core.ICompletableFuture;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
 public interface CarsForSaleRepo {
 
-    ICompletableFuture<List<CarForSaleDTO>> fetchCarsForSale();
+    Flux<List<CarForSaleDTO>> fetchCarsForSale();
 
 }

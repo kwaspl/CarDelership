@@ -2,9 +2,9 @@ package com.example.dealership.query;
 
 import com.example.dealership.query.datamodel.CarForSaleDTO;
 import com.example.dealership.query.repo.CarsForSaleRepo;
-import com.hazelcast.core.ICompletableFuture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class CarsForSaleImpl implements CarsForSale {
     CarsForSaleRepo carsForSaleRepo;
 
     @Override
-    public ICompletableFuture<List<CarForSaleDTO>> carsForSale() {
+    public Flux<List<CarForSaleDTO>> carsForSale() {
         return carsForSaleRepo.fetchCarsForSale();
     }
 
