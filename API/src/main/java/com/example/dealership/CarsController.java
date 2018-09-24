@@ -1,5 +1,6 @@
 package com.example.dealership;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -11,17 +12,24 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 @Configuration
 public class CarsController {
 
+    @Autowired
+    QueryHandler queryHandler;
+
+    @Autowired
+    CommandHandler commandHandler;
+
     @Bean
-    public RouterFunction<ServerResponse> route(QueryHandler queryHandler) {
+    public RouterFunction<ServerResponse> route() {
 
         return RouterFunctions
                 .route(GET("/cars") ,queryHandler::getCarsForSale)
-                .andRoute(POST("/car"), queryHandler::getCarsForSale)
-                .andRoute(PATCH("/car"), queryHandler::getCarsForSale)
-                .andRoute(DELETE("/car"), queryHandler::getCarsForSale)
-                .andRoute(POST("/order"), queryHandler::getCarsForSale)
-                .andRoute(PATCH("/order"), queryHandler::getCarsForSale)
-                .andRoute(DELETE("/order"), queryHandler::getCarsForSale)
+                .andRoute(GET("/car/{id}") ,queryHandler::getDetailsOfTheCar)
+                .andRoute(POST("/car"), commandHandler::addNewCar)
+                .andRoute(PATCH("/car/{id}"), commandHandler::updateCarOffer)
+                .andRoute(DELETE("/car/{id}"), commandHandler::takeCarOffTheMarket)
+                .andRoute(POST("/order"), commandHandler::buyThatCar)
+                .andRoute(PATCH("/order"), commandHandler::updateDetailsOfYourOrder)
+                .andRoute(DELETE("/order"), commandHandler::cancelYourOrder)
                 ;
     }
 }

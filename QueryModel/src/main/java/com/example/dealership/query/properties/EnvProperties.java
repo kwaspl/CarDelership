@@ -5,22 +5,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix="env")
 public class EnvProperties {
 
-    private String hazelcastname;
-    private String carCacheName;
+    private String carsDbName;
+    private String dbConnectionString;
 
-    public String getHazelcastname() {
-        return hazelcastname;
+    public String carsDBName() {
+        return carsDbName;
     }
 
-    public void setHazelcastname(String hazelcastname) {
-        this.hazelcastname = hazelcastname;
-    }
 
-    public String getCarCacheName() {
-        return carCacheName;
-    }
-
-    public void setCarCacheName(String carCacheName) {
-        this.carCacheName = carCacheName;
+    public String DBConnectionString() {
+        return dbConnectionString;
     }
 }

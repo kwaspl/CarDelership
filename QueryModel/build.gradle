@@ -27,12 +27,8 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-webflux')
-	compile('org.springframework.boot:spring-boot-starter-cache')
+	compile('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
 
-    compile('javax.cache:cache-api:1.1.0')
-
-	compile('com.hazelcast:hazelcast-spring:3.9.3')
-	compile('com.hazelcast:hazelcast:3.9.3')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('io.projectreactor:reactor-test')
 	testCompile('org.assertj:assertj-core:3.11.1')

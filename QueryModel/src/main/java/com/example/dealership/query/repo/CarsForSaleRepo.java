@@ -1,12 +1,8 @@
 package com.example.dealership.query.repo;
 
-import com.example.dealership.query.datamodel.CarForSaleDTO;
-import reactor.core.publisher.Flux;
+import com.example.dealership.query.datamodel.CarQuickDescriptionDTO;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface CarsForSaleRepo {
-
-    Flux<List<CarForSaleDTO>> fetchCarsForSale();
-
-}
+@Repository
+public interface CarsForSaleRepo extends ReactiveMongoRepository<CarQuickDescriptionDTO, String> { }

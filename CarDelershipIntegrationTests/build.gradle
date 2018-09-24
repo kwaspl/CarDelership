@@ -27,11 +27,9 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-webflux')
-	compile('org.springframework.boot:spring-boot-starter-cache')
 
+	testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.1.1')
 
-	compile('com.hazelcast:hazelcast-spring:3.9.3')
-	compile('com.hazelcast:hazelcast:3.9.3')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('io.projectreactor:reactor-test')
 	testCompile('org.assertj:assertj-core:3.11.1')

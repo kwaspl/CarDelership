@@ -1,16 +1,15 @@
 package com.example.dealership.query;
 
-import com.example.dealership.query.datamodel.CarForSaleDTO;
+import com.example.dealership.query.datamodel.CarDetailsDTO;
+import com.example.dealership.query.datamodel.CarQuickDescriptionDTO;
 import reactor.core.publisher.Flux;
-
-import java.util.List;
+import reactor.core.publisher.Mono;
 
 public interface CarsForSale {
 
-    Flux<List<CarForSaleDTO>> carsForSale();
+    Flux<CarQuickDescriptionDTO> carsForSale();
 
-    List<CarForSaleDTO> carsForSaleFavoredByTheUser(String userid);
+    Mono<CarDetailsDTO> carDetails(String id);
 
-    List<CarForSaleDTO> carsForSaleOfMake(String make);
 }
 
