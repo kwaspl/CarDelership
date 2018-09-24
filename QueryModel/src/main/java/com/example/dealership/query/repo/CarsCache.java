@@ -13,7 +13,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.concurrent.Future;
 
 @Component
 @EnableConfigurationProperties(EnvProperties.class)
@@ -29,10 +28,9 @@ public class CarsCache {
         instance = Hazelcast.getHazelcastInstanceByName(properties.getHazelcastname());
     }
 
-    public Future<List<CarForSaleDTO>> get(){
+    public ICompletableFuture<List<CarForSaleDTO>> get(){
         final ICache<String, List<CarForSaleDTO>> cache = instance.getCacheManager().getCache(properties.getCarCacheName());
         final ICompletableFuture<List<CarForSaleDTO>> async = cache.getAsync("");
-        async.
         return cache.getAsync("cars");
     }
 

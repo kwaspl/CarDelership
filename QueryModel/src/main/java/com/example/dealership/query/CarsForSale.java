@@ -1,13 +1,13 @@
 package com.example.dealership.query;
 
 import com.example.dealership.query.datamodel.CarForSaleDTO;
+import com.hazelcast.core.ICompletableFuture;
 
 import java.util.List;
-import java.util.concurrent.Future;
 
 public interface CarsForSale {
 
-    Future<List<CarForSaleDTO>> carsForSale();
+    ICompletableFuture<List<CarForSaleDTO>> carsForSale();
 
     List<CarForSaleDTO> carsForSaleFavoredByTheUser(String userid);
 
