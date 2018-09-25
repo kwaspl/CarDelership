@@ -4,6 +4,7 @@ import com.example.dealership.query.CarsForSale;
 import com.example.dealership.query.datamodel.CarQuickDescriptionDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
@@ -13,6 +14,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Flux;
+
+import java.util.Arrays;
+
+import static org.mockito.Mockito.when;
+import static reactor.core.publisher.Flux.fromIterable;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {CarsController.class, QueryHandler.class, CommandHandler.class})
@@ -31,14 +38,18 @@ public class CarsControllerITest {
     public void cars_correctResponseIsReturned() throws Exception {
         webClient = WebTestClient.bindToApplicationContext(context).build();
 
-                webClient
+        final Flux<CarQuickDescriptionDTO> audi = fromIterable(Arrays.asList(new CarQuickDescriptionDTO("1", "audi")));
+
+        when(carsForSale.carsForSale()).thenReturn(audi);
+
+        webClient
                 .get().uri("/cars")
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
                 .expectStatus()
                 .isOk()
                 .expectBodyList(CarQuickDescriptionDTO.class)
-                .hasSize(0);
+                .hasSize(1);
     }
 
 }

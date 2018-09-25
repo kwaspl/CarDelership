@@ -16,6 +16,9 @@ public class CarQuickDescriptionDTO implements Serializable {
     @Size(max = 140)
     public String make;
 
+    public CarQuickDescriptionDTO() {
+    }
+
     public CarQuickDescriptionDTO(String id, @NotBlank @Size(max = 140) String make) {
         this.id = id;
         this.make = make;
