@@ -1,51 +1,54 @@
-package com.example.dealership.query;
+package com.example.dealership;
 
 import com.example.dealership.query.datamodel.CarQuickDescriptionDTO;
 import com.example.dealership.query.repo.CarsForSaleRepo;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.test.context.junit4.SpringRunner;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
-import java.util.concurrent.ExecutionException;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest({"env.carsDbName=cars_db", "env.dbConnectionString=mongodb://localhost"})
-public class CarsForSaleRepoImplITest {
+@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
+public class QueryRepoITest {
 
     public static final CarQuickDescriptionDTO audi = new CarQuickDescriptionDTO("1", "audi");
-    public static final CarQuickDescriptionDTO mercedes = new CarQuickDescriptionDTO("2", "mercedes");
-    public static final CarQuickDescriptionDTO fiat = new CarQuickDescriptionDTO("2", "fiat");
-    public static final CarQuickDescriptionDTO chevrolet = new CarQuickDescriptionDTO("3", "chevrolet");
 
     @Autowired
-    CarsForSaleRepo repo;
+    CarsForSaleRepo carsForSaleRepo;
 
     @Test
-    public void fetchCarsForSale_listInFutureNotNull() throws ExecutionException, InterruptedException {
-        final Flux<CarQuickDescriptionDTO> carForSaleDTOFlux = repo.findAll();
+    public void canaryTest() {
+        assertThat(carsForSaleRepo).isNotNull();
+    }
+
+    @Test
+    public void fetchCarsForSale_listInFutureNotNull() {
+        final Flux<CarQuickDescriptionDTO> carForSaleDTOFlux = carsForSaleRepo.findAll();
 
         StepVerifier
                 .create(carForSaleDTOFlux)
                 .expectSubscription()
-                .assertNext( (car) -> Assertions.assertThat(car.id).isEqualTo("1"))
+                .assertNext((car) -> Assertions.assertThat(car.id).isEqualTo("1"))
                 .verifyComplete();
     }
 
     @Before
-    public void putDataInCache(){
-        repo.save(audi).subscribe();
+    public void putDataInCache() {
+        carsForSaleRepo.save(audi).subscribe();
     }
 
     @SpringBootApplication
-    @EnableCaching
-    static class SpringConfiguration {}
-
+    public static class DummyStarter {
+    }
 }

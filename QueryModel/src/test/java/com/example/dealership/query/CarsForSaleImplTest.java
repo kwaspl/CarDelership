@@ -19,15 +19,4 @@ public class CarsForSaleImplTest {
         assertThat(carsForSale.carsForSale()).isNotNull();
     }
 
-    @Test
-    public void carsForSaleFavoredByTheUser_returnListNotNullForTheDefaultValues(){
-        assertThat(carsForSale.carsForSaleFavoredByTheUser(EMPTY_STRING)).isNotNull();
-    }
-
-    @Test
-    public void carsForSaleOfMake_returnListNotNullForTheDefaultValues(){
-        assertThat(carsForSale.carsForSaleOfMake(EMPTY_STRING)).isNotNull();
-    }
-
-
 }

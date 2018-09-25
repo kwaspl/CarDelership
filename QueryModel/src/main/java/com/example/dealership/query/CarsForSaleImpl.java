@@ -1,10 +1,12 @@
 package com.example.dealership.query;
 
+import com.example.dealership.query.datamodel.CarDetailsDTO;
 import com.example.dealership.query.datamodel.CarQuickDescriptionDTO;
 import com.example.dealership.query.repo.CarsForSaleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -22,12 +24,8 @@ public class CarsForSaleImpl implements CarsForSale {
     }
 
     @Override
-    public List<CarQuickDescriptionDTO> carsForSaleFavoredByTheUser(String userid) {
-        return emptyList();
+    public Mono<CarDetailsDTO> carDetails(String id) {
+        return null;
     }
 
-    @Override
-    public List<CarQuickDescriptionDTO> carsForSaleOfMake(String make) {
-        return emptyList();
-    }
 }
