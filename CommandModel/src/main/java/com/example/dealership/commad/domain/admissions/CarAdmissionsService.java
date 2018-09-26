@@ -1,7 +1,7 @@
-package com.example.dealership.commad;
+package com.example.dealership.commad.domain.admissions;
 
 import com.example.dealership.commad.datamodel.NewCarDTO;
 
-public interface CarAdmissions {
+public interface CarAdmissionsService {
     String admitNewCar(NewCarDTO newCar);
 }

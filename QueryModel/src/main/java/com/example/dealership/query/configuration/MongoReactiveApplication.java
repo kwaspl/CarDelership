@@ -17,7 +17,9 @@ public class MongoReactiveApplication extends AbstractReactiveMongoConfiguration
 
     @Override
     public MongoClient reactiveMongoClient() {
-        return MongoClients.create(envProperties.DBConnectionString());
+        System.out.println("############################################");
+        return
+                MongoClients.create(envProperties.DBConnectionString());
     }
 
     @Override

@@ -28,9 +28,11 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-webflux')
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
+    compile('de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.1.1')
+
+    compileOnly "org.springframework.boot:spring-boot-configuration-processor"
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.1.1')
 	testCompile('io.projectreactor:reactor-test')
 	testCompile('org.assertj:assertj-core:3.11.1')
 

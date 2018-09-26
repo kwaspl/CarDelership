@@ -1,6 +1,6 @@
 package com.example.dealership;
 
-import com.example.dealership.commad.CarAdmissions;
+import com.example.dealership.commad.domain.admissions.CarAdmissionsService;
 import com.example.dealership.commad.datamodel.NewCarDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 public class CommandHandler {
 
     @Autowired
-    CarAdmissions carAdmission;
+    CarAdmissionsService carAdmission;
 
     public Mono<ServerResponse> addNewCar(ServerRequest serverRequest) {
         return serverRequest
