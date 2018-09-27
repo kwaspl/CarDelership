@@ -7,8 +7,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-@Document(collection = "cars")
-public class CarQuickDescriptionDTO implements Serializable {
+@Document(collection = "CarOffersQuick")
+public class CarOfferQuickDescriptionDTO implements Serializable {
     @Id
     public String id;
 
@@ -16,11 +16,16 @@ public class CarQuickDescriptionDTO implements Serializable {
     @Size(max = 140)
     public String make;
 
-    public CarQuickDescriptionDTO() {
+    @NotBlank
+    @Size(max = 140)
+    public String model;
+
+    public CarOfferQuickDescriptionDTO() {
     }
 
-    public CarQuickDescriptionDTO(String id, @NotBlank @Size(max = 140) String make) {
+    public CarOfferQuickDescriptionDTO(String id, @NotBlank @Size(max = 140) String make, @NotBlank @Size(max = 140) String model) {
         this.id = id;
         this.make = make;
+        this.model = model;
     }
 }

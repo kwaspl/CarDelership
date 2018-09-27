@@ -8,15 +8,14 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CarsForSaleImplTest {
+public class CarsOffersImplTest {
 
-    public static final String EMPTY_STRING = "";
     @InjectMocks
-    CarsForSaleImpl carsForSale;
+    CarOffersImpl carsForSale;
 
     @Test
     public void carsForSale_returnedListNotNull(){
-        assertThat(carsForSale.carsForSale()).isNotNull();
+        assertThat(carsForSale.availableOffers()).isNotNull();
     }
 
 }

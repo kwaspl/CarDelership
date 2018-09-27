@@ -1,5 +1,7 @@
-package com.example.dealership;
+package com.example.dealership.endpoints;
 
+import com.example.dealership.handlers.CommandHandler;
+import com.example.dealership.handlers.QueryHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,16 +22,10 @@ public class CarsController {
 
     @Bean
     public RouterFunction<ServerResponse> route() {
-
         return RouterFunctions
-                .route(GET("/cars") ,queryHandler::getCarsForSale)
-                .andRoute(GET("/car/{id}") ,queryHandler::getDetailsOfTheCar)
-                .andRoute(POST("/car"), commandHandler::addNewCar)
-                .andRoute(PATCH("/car/{id}"), commandHandler::updateCarOffer)
-                .andRoute(DELETE("/car/{id}"), commandHandler::takeCarOffTheMarket)
-                .andRoute(POST("/order"), commandHandler::buyThatCar)
-                .andRoute(PATCH("/order"), commandHandler::updateDetailsOfYourOrder)
-                .andRoute(DELETE("/order"), commandHandler::cancelYourOrder)
-                ;
+                .route(GET("/cars") ,queryHandler::getAllCarsOffers)
+                .andRoute(GET("/car/{id}") ,queryHandler::getDetailsCarOffer)
+                .andRoute(POST("/car"), commandHandler::addNewCarOffer)
+                .andRoute(POST("/order/{id}"), commandHandler::buyThatCar);
     }
 }

@@ -1,12 +1,13 @@
 package com.example.dealership;
 
-import com.example.dealership.query.CarsForSale;
-import com.example.dealership.query.datamodel.CarQuickDescriptionDTO;
+import com.example.dealership.endpoints.CarsController;
+import com.example.dealership.handlers.CommandHandler;
+import com.example.dealership.handlers.QueryHandler;
+import com.example.dealership.query.CarOffers;
+import com.example.dealership.query.datamodel.CarOfferQuickDescriptionDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationContext;
@@ -18,6 +19,7 @@ import reactor.core.publisher.Flux;
 
 import java.util.Arrays;
 
+import static java.util.Arrays.asList;
 import static org.mockito.Mockito.when;
 import static reactor.core.publisher.Flux.fromIterable;
 
@@ -29,8 +31,8 @@ public class CarsControllerITest {
     @Autowired
     private ApplicationContext context;
 
-    @MockBean(name="carsForSale")
-    private CarsForSale carsForSale;
+    @MockBean(name="carOffers")
+    private CarOffers carOffers;
 
     private WebTestClient webClient;
 
@@ -38,9 +40,9 @@ public class CarsControllerITest {
     public void cars_correctResponseIsReturned() throws Exception {
         webClient = WebTestClient.bindToApplicationContext(context).build();
 
-        final Flux<CarQuickDescriptionDTO> audi = fromIterable(Arrays.asList(new CarQuickDescriptionDTO("1", "audi")));
+        final Flux<CarOfferQuickDescriptionDTO> audi = fromIterable(asList(new CarOfferQuickDescriptionDTO("1", "audi")));
 
-        when(carsForSale.carsForSale()).thenReturn(audi);
+        when(carOffers.availableOffers()).thenReturn(audi);
 
         webClient
                 .get().uri("/cars")
@@ -48,7 +50,7 @@ public class CarsControllerITest {
                 .exchange()
                 .expectStatus()
                 .isOk()
-                .expectBodyList(CarQuickDescriptionDTO.class)
+                .expectBodyList(CarOfferQuickDescriptionDTO.class)
                 .hasSize(1);
     }
 

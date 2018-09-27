@@ -1,8 +1,8 @@
-package com.example.dealership;
+package com.example.dealership.handlers;
 
-import com.example.dealership.query.CarsForSale;
-import com.example.dealership.query.datamodel.CarDetailsDTO;
-import com.example.dealership.query.datamodel.CarQuickDescriptionDTO;
+import com.example.dealership.query.CarOffers;
+import com.example.dealership.query.datamodel.CarOfferDetailsDTO;
+import com.example.dealership.query.datamodel.CarOfferQuickDescriptionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -17,18 +17,18 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 public class QueryHandler {
 
     @Autowired
-    CarsForSale carsForSale;
+    CarOffers carsOffers;
 
-    public Mono<ServerResponse> getCarsForSale(ServerRequest request) {
+    public Mono<ServerResponse> getAllCarsOffers(ServerRequest request) {
         return  ok()
                 .contentType(APPLICATION_JSON)
-                .body(fromPublisher(carsForSale.carsForSale(), CarQuickDescriptionDTO.class));
+                .body(fromPublisher(carsOffers.availableOffers(), CarOfferQuickDescriptionDTO.class));
     }
 
-    public Mono<ServerResponse> getDetailsOfTheCar(ServerRequest serverRequest) {
-        final Mono<CarDetailsDTO> carDetails = carsForSale.carDetails(serverRequest.pathVariable("id"));
+    public Mono<ServerResponse> getDetailsCarOffer(ServerRequest serverRequest) {
+        final Mono<CarOfferDetailsDTO> carDetails = carsOffers.carDetails(serverRequest.pathVariable("id"));
         return ok()
                 .contentType(APPLICATION_JSON)
-                .body(fromPublisher(carDetails, CarDetailsDTO.class));
+                .body(fromPublisher(carDetails, CarOfferDetailsDTO.class));
     }
 }

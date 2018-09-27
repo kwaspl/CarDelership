@@ -11,6 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
         "spring.datasource.username=sa",
         "spring.datasource.password=sa"
 })
-public class CarSalesImplITest {
+public class CarOfferSalesImplITest {
 
 }

@@ -1,7 +1,7 @@
 package com.example.dealership;
 
-import com.example.dealership.query.datamodel.CarQuickDescriptionDTO;
-import com.example.dealership.query.repo.CarsForSaleRepo;
+import com.example.dealership.query.datamodel.CarOfferQuickDescriptionDTO;
+import com.example.dealership.query.repo.CarOffersRepo;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -18,14 +18,20 @@ import reactor.test.StepVerifier;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest({"env.carsDbName=cars_db", "env.dbConnectionString=mongodb://localhost"})
+@SpringBootTest({"spring.datasource.driver-class-name=org.h2.Driver",
+                "spring.datasource.url=jdbc:h2:mem:db;DB_CLOSE_DELAY=-1",
+                "spring.datasource.username=sa",
+                "spring.datasource.password=sa",
+                "spring.activemq.broker-url=vm://embedded?broker.persistent=false,useShutdownHook=false",
+                "spring.activemq.in-memory=true"
+})
 @FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class QueryRepoITest {
 
-    public static final CarQuickDescriptionDTO audi = new CarQuickDescriptionDTO("1", "audi");
+    public static final CarOfferQuickDescriptionDTO audi = new CarOfferQuickDescriptionDTO("1", "audi");
 
     @Autowired
-    CarsForSaleRepo carsForSaleRepo;
+    CarOffersRepo carsForSaleRepo;
 
     @Test
     public void canaryTest() {
@@ -34,7 +40,7 @@ public class QueryRepoITest {
 
     @Test
     public void fetchCarsForSale_listInFutureNotNull() {
-        final Flux<CarQuickDescriptionDTO> carForSaleDTOFlux = carsForSaleRepo.findAll();
+        final Flux<CarOfferQuickDescriptionDTO> carForSaleDTOFlux = carsForSaleRepo.findAll();
 
         StepVerifier
                 .create(carForSaleDTOFlux)

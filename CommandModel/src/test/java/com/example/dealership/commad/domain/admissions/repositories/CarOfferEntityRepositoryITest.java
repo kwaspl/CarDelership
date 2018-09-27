@@ -1,8 +1,6 @@
-package com.example.dealership.commad.domain.admissions;
+package com.example.dealership.commad.domain.admissions.repositories;
 
-import com.example.dealership.commad.domain.admissions.repositories.CarEntityRepository;
-import com.example.dealership.commad.domain.admissions.repositories.entites.Car;
-import org.assertj.core.api.Assertions;
+import com.example.dealership.commad.domain.admissions.repositories.entites.CarOffer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,28 +20,26 @@ import static org.assertj.core.api.Assertions.assertThat;
         "spring.datasource.username=sa",
         "spring.datasource.password=sa"
 })
-public class CarAdmissionsServiceImplITest {
-
+public class CarOfferEntityRepositoryITest {
     @Autowired
-    private CarEntityRepository genericEntityRepository;
+    private CarOfferEntityRepository genericEntityRepository;
 
     @Test //--add-modules java.xml.bind
     public void givenGenericEntityRepository_whenSaveAndRetreiveEntity_thenOK() {
         //given
-        final Car s = new Car();
-        s.id = UUID.randomUUID().toString();
+        final String id = UUID.randomUUID().toString();
+        final CarOffer car = new CarOffer(id);
 
         //when
-        final Car carSaved = genericEntityRepository.save(s);
-        Optional<Car> foundEntity = genericEntityRepository.findById(carSaved.id);
+        final CarOffer carSaved = genericEntityRepository.save(car);
+        Optional<CarOffer> foundEntity = genericEntityRepository.findById(id);
 
         //then
         assertThat(foundEntity).isNotEmpty();
-        assertThat(foundEntity.get().id).isEqualTo(s.id);
+        assertThat(foundEntity.get()).isEqualTo(car);
     }
 
     @SpringBootApplication
     public static class DummyStarter {
     }
-
 }
