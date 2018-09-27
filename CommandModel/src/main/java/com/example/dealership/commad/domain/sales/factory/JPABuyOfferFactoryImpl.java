@@ -24,7 +24,7 @@ public class JPABuyOfferFactoryImpl implements JPABuyOfferFactory {
             throw new BuyOfferInvalidException("offer placed in the wrong currency");
         }
 
-        if(snapshot.price.compareTo(buyOfferDTO.priceOffered) >= 0){
+        if(snapshot.price.compareTo(buyOfferDTO.priceOffered) <= 0){
             BuyOffer buyOffer = new BuyOffer(randomUUID(), buyOfferDTO.carOfferId, buyOfferDTO.priceOffered, getInstance(buyOfferDTO.currency), Boolean.TRUE);
             return buyOffer;
         } else {

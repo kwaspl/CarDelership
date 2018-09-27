@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
 public class BuyOfferServiceImpl implements BuyOfferService {
 
     @Autowired
-    CarOfferAdmissionsService carOfferAdmissionsService;
+    private CarOfferAdmissionsService carOfferAdmissionsService;
 
     @Autowired
-    JPABuyOfferFactory jpaBuyOfferFactory;
+    private JPABuyOfferFactory jpaBuyOfferFactory;
 
     @Override
     public OfferIdDTO admitOrRejectNewOffer(BuyOfferDTO buyOfferDTO) {
@@ -24,7 +24,9 @@ public class BuyOfferServiceImpl implements BuyOfferService {
         final BuyOffer buyOffer = jpaBuyOfferFactory.createBuyOfferOrThrowException(buyOfferDTO, snapshot);
         if(buyOffer.isAccepted()){
             carOfferAdmissionsService.sellCar(buyOffer.carOfferId);
+            return new OfferIdDTO(buyOffer.id);
+        } else {
+            return new OfferIdDTO(buyOffer.id, "the price was too low, however we notify the seller about your intrest");
         }
-        return new OfferIdDTO(buyOffer.id);
     }
 }
