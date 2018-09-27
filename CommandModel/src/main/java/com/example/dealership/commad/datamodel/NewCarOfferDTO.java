@@ -17,4 +17,15 @@ public class NewCarOfferDTO {
 
     public NewCarOfferDTO() {
     }
+
+    @Override
+    public String toString() {
+        return "NewCarOfferDTO{" +
+                "make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", dateOfConstruction=" + dateOfConstruction +
+                ", price=" + price +
+                ", currency='" + currency + '\'' +
+                '}';
+    }
 }

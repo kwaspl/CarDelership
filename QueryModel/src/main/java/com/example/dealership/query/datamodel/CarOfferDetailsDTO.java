@@ -15,11 +15,11 @@ public class CarOfferDetailsDTO {
     public final String id;
     public final String make;
     public final String model;
-    public final Date yearOfProduction;
+    public final String yearOfProduction;
     public final BigDecimal price;
     public final String currency;
 
-    public CarOfferDetailsDTO(String id, String make, String model, Date yearOfProduction, BigDecimal price, String currency) {
+    public CarOfferDetailsDTO(String id, String make, String model, String yearOfProduction, BigDecimal price, String currency) {
         this.id = id;
         this.make = make;
         this.model = model;

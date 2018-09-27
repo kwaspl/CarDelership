@@ -33,7 +33,7 @@ public class CarOfferAdmissionsServiceImplITest {
     @Test //--add-modules java.xml.bind
     public void givenGenericEntityRepository_whenSaveAndRetreiveEntity_thenOK() throws InterruptedException {
         assertThat(carOfferAdmissionsService).isNotNull();
-        carOfferAdmissionsService.admitNewCarOffer(createNewCar());
+        carOfferAdmissionsService.admitOrRejectNewOffer(createNewCar());
     }
 
     private NewCarOfferDTO createNewCar() {

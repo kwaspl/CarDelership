@@ -1,6 +1,6 @@
-package com.example.dealership.commad.domain.admissions.repositories;
+package com.example.dealership.commad.domain.admissions.repository;
 
-import com.example.dealership.commad.domain.admissions.repositories.entites.CarOffer;
+import com.example.dealership.commad.domain.admissions.repository.entites.CarOffer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +20,14 @@ import static org.assertj.core.api.Assertions.assertThat;
         "spring.datasource.username=sa",
         "spring.datasource.password=sa"
 })
-public class CarOfferEntityRepositoryITest {
+public class CarOfferRepositoryITest {
     @Autowired
-    private CarOfferEntityRepository genericEntityRepository;
+    private CarOfferRepository genericEntityRepository;
 
     @Test //--add-modules java.xml.bind
     public void givenGenericEntityRepository_whenSaveAndRetreiveEntity_thenOK() {
         //given
-        final String id = UUID.randomUUID().toString();
+        final UUID id = UUID.randomUUID();
         final CarOffer car = new CarOffer(id);
 
         //when

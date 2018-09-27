@@ -40,7 +40,7 @@ public class CarsControllerITest {
     public void cars_correctResponseIsReturned() throws Exception {
         webClient = WebTestClient.bindToApplicationContext(context).build();
 
-        final Flux<CarOfferQuickDescriptionDTO> audi = fromIterable(asList(new CarOfferQuickDescriptionDTO("1", "audi")));
+        final Flux<CarOfferQuickDescriptionDTO> audi = fromIterable(asList(new CarOfferQuickDescriptionDTO("1", "audi", "Q6")));
 
         when(carOffers.availableOffers()).thenReturn(audi);
 

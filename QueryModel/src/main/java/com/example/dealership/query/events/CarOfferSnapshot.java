@@ -9,7 +9,7 @@ public class CarOfferSnapshot {
     public String id;
     public String make;
     public String model;
-    public Date dateOfConstruction;
+    public String dateOfConstruction;
     public BigDecimal price;
     public String currency;
 

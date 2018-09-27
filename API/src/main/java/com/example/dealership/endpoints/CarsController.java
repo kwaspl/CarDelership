@@ -26,6 +26,6 @@ public class CarsController {
                 .route(GET("/cars") ,queryHandler::getAllCarsOffers)
                 .andRoute(GET("/car/{id}") ,queryHandler::getDetailsCarOffer)
                 .andRoute(POST("/car"), commandHandler::addNewCarOffer)
-                .andRoute(POST("/order/{id}"), commandHandler::buyThatCar);
+                .andRoute(POST("/order"), commandHandler::buyThatCar);
     }
 }

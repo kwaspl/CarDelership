@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class QueryRepoITest {
 
-    public static final CarOfferQuickDescriptionDTO audi = new CarOfferQuickDescriptionDTO("1", "audi");
+    public static final CarOfferQuickDescriptionDTO audi = new CarOfferQuickDescriptionDTO("1", "audi", "A8");
 
     @Autowired
     CarOffersRepo carsForSaleRepo;
