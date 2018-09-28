@@ -14,5 +14,12 @@ public class OfferInvalidException extends RuntimeException {
         public JsonException(String reason) {
             this.reason = reason;
         }
+
+        @Override
+        public String toString() {
+            return "JsonException{" +
+                    "reason='" + reason + '\'' +
+                    '}';
+        }
     }
 }
