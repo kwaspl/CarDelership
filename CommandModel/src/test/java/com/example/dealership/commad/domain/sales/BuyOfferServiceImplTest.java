@@ -77,7 +77,15 @@ public class BuyOfferServiceImplTest {
         when(carOfferAdmissionsService.snapshot(id)).thenReturn(crateSnapshot(id, new BigDecimal(11l), TRUE, "PLN"));
 
         //when
-        final OfferIdDTO offerIdDTO = buyOfferService.admitOrRejectNewOffer(buyOfferDTO);
+        try {
+            final OfferIdDTO offerIdDTO = buyOfferService.admitOrRejectNewOffer(buyOfferDTO);
+            fail("the test shuld not pass, the car was alredy sold");
+        } catch (Exception e){
+
+            //then
+            assertThat(e).isInstanceOf(BuyOfferInvalidException.class);
+            assertThat(e.getMessage()).contains("sold");
+        }
     }
 
     @Test

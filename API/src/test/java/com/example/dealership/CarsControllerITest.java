@@ -1,5 +1,7 @@
 package com.example.dealership;
 
+import com.example.dealership.commad.domain.admissions.CarOfferAdmissionsService;
+import com.example.dealership.commad.domain.sales.BuyOfferService;
 import com.example.dealership.endpoints.CarsController;
 import com.example.dealership.handlers.CommandHandler;
 import com.example.dealership.handlers.QueryHandler;
@@ -31,8 +33,14 @@ public class CarsControllerITest {
     @Autowired
     private ApplicationContext context;
 
-    @MockBean(name="carOffers")
+    @MockBean
     private CarOffers carOffers;
+
+    @MockBean
+    private CarOfferAdmissionsService carOfferAdmissionsService;
+
+    @MockBean
+    private BuyOfferService buyOfferService;
 
     private WebTestClient webClient;
 

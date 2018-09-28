@@ -1,4 +1,4 @@
-package com.example.dealership;
+package com.example.dealership.query.repo;
 
 import com.example.dealership.query.datamodel.CarOfferQuickDescriptionDTO;
 import com.example.dealership.query.repo.CarOffersRepo;
@@ -23,7 +23,9 @@ import static org.assertj.core.api.Assertions.assertThat;
                 "spring.datasource.username=sa",
                 "spring.datasource.password=sa",
                 "spring.activemq.broker-url=vm://embedded?broker.persistent=false,useShutdownHook=false",
-                "spring.activemq.in-memory=true"
+                "spring.activemq.in-memory=true",
+                "domain.events.offer.admitted=x1",
+                "domain.events.offer.sold=x2"
 })
 @FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class QueryRepoITest {
@@ -31,16 +33,16 @@ public class QueryRepoITest {
     public static final CarOfferQuickDescriptionDTO audi = new CarOfferQuickDescriptionDTO("1", "audi", "A8");
 
     @Autowired
-    CarOffersRepo carsForSaleRepo;
+    CarOffersRepo carOffersRepo;
 
     @Test
     public void canaryTest() {
-        assertThat(carsForSaleRepo).isNotNull();
+        assertThat(carOffersRepo).isNotNull();
     }
 
     @Test
     public void fetchCarsForSale_listInFutureNotNull() {
-        final Flux<CarOfferQuickDescriptionDTO> carForSaleDTOFlux = carsForSaleRepo.findAll();
+        final Flux<CarOfferQuickDescriptionDTO> carForSaleDTOFlux = carOffersRepo.findAll();
 
         StepVerifier
                 .create(carForSaleDTOFlux)
@@ -51,7 +53,7 @@ public class QueryRepoITest {
 
     @Before
     public void putDataInCache() {
-        carsForSaleRepo.save(audi).subscribe();
+        carOffersRepo.save(audi).subscribe();
     }
 
     @SpringBootApplication

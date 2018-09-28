@@ -1,5 +1,6 @@
 package com.example.dealership.query.events.listener;
 
+import com.example.dealership.query.CarOffers;
 import com.example.dealership.query.datamodel.CarOfferDetailsDTO;
 import com.example.dealership.query.datamodel.CarOfferQuickDescriptionDTO;
 import com.example.dealership.query.events.CarOfferAdmittedEvent;
@@ -19,6 +20,7 @@ public class CarOfferAdmittedEventListener {
 
     @Autowired
     CarOffersDetailsRepo carOffersDetailsRepo;
+
 
     @JmsListener(destination = "${domain.events.offer.admitted}")
     public void receiveMessage(String carOfferAdmittedEvent) {
